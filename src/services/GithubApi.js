@@ -8,8 +8,7 @@ import 'rxjs/add/operator/mergeMap';
 class GithubApi {
   static getUsers(lastUserId = 0) {
     const url = "https://api.github.com/users?since=" + lastUserId;
-    return Observable.fromPromise($.get(url))
-      .flatMap((users) => Observable.from(users))
+    return Observable.fromPromise($.get(url));
   }
 }
 
