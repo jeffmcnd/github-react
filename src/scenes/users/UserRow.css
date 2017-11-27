@@ -1,0 +1,13 @@
+.UserRow-avatar {
+  height: 72px;
+  width: 72px;
+  border-radius: 50%;
+  background-color: green;
+}
+
+.UserRow-login {
+  height: 72px;
+  width: 72px;
+  background-color: red;
+  display: inline-block;
+}
