@@ -9,16 +9,12 @@ class UserListContainer extends Component {
     this.getUsers = this.props.getUsers;
   }
 
-  showUsers(users = []) {
-    this.setState((prevState, props) => ({
-      users: prevState.users.concat(users)
-    }));
-  }
-
   componentDidMount() {
     this.getUsers()
       .subscribe((users) => {
-        this.showUsers(users);
+        this.setState((prevState, props) => ({
+          users: prevState.users.concat(users)
+        }));
       });
   }
 
