@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
+
+// import $ from 'jquery';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
+
 import UserRow from './UserRow';
+import usersJson from './../../users.json';
 
 class UserList extends Component {
   constructor(props) {
     super(props);
-    this.state = { users: [] };
+    this.state = { userRows: [] };
   }
 
   componentDidMount() {
@@ -12,22 +18,24 @@ class UserList extends Component {
   }
 
   getUsers() {
-    const data = [
-      { id: 1, avatarUrl: "https://avatars0.githubusercontent.com/u/1?v=4", login: "mojombo" },
-      { id: 2, avatarUrl: "https://avatars0.githubusercontent.com/u/2?v=4", login: "defunkt" },
-    ]
-    const rows = data.map((user) =>
-      <UserRow key={user.id}
-        user={user} />
-    );
-    this.setState({ users: rows })
+    Observable.create((it) => {
+      // const results = $.get('https://api.github.com/users')
+      const results = usersJson
+      it.next(results)
+    })
+      .subscribe((users) => {
+        const userRows = users.map((user) =>
+          <UserRow key={user.id}
+            user={user} />
+        );
+        this.setState({ userRows: userRows })
+      });
   }
 
   render() {
-    const users = this.state.users
     return (
       <ul>
-        {users}
+        {this.state.userRows}
       </ul>
     );
   }
