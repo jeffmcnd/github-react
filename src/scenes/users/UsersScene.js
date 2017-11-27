@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+
+import GithubApi from './../../services/GithubApi';
+
 import GithubToolbar from './../../common/components/GithubToolbar';
 import UserList from './UserList';
 
@@ -7,7 +10,7 @@ class UsersPage extends Component {
     return (
         <div>
             <GithubToolbar title="Github Users"/>
-            <UserList />
+            <UserList getUsers={GithubApi.getUsers} />
         </div>
     );
   }
